@@ -19,7 +19,6 @@
 	
 	<instructions type="install">
 		<instruction type="file">files.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="eventListener">eventlistener.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
