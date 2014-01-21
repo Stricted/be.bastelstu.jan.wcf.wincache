@@ -98,8 +98,8 @@ class WinCacheSource implements ICacheSource {
 		$regex = null;
 		if ($pattern !== null) $regex = new Regex('^'.$pattern.'$');
 		
-		$apcCacheInfo = APC::cache_info();
-		foreach ($apcCacheInfo as $cache) {
+		$info = wincache_ucache_info();
+		foreach ($info['ucache_entries'] as $cache) {
 			if ($regex === null) {
 				if (StringUtil::startsWith(basename($cache['key_name']), $this->prefix)) {
 					wincache_ucache_delete(basename($cache['key_name']));
