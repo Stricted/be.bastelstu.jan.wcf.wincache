@@ -3,7 +3,7 @@
 	<packageinformation>
 		<packagename>WinCache</packagename>
 		<packagedescription></packagedescription>
-		<version>1.0.0 Beta 1</version>
+		<version>1.0.0</version>
 		<date>2014-01-21</date>
 		<license><![CDATA[GNU LGPL <https://www.gnu.org/licenses/lgpl.html>]]></license>
 	</packageinformation>
@@ -18,6 +18,12 @@
 	</requiredpackages>
 	
 	<instructions type="install">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="eventListener">eventlistener.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+	
+	<instructions type="update" fromversion="1.0.0 Beta 1">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="eventListener">eventlistener.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
