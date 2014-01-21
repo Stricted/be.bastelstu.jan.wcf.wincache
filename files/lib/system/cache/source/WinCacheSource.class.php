@@ -59,8 +59,8 @@ class WinCacheSource implements ICacheSource {
 	 * @return	mixed
 	 */
 	public function get($cacheName, $maxLifetime) {
-		if (!wincache_ucache_exists($cacheName)) return null;
-		return wincache_ucache_get($cacheName);
+		if (!wincache_ucache_exists($this->prefix . $cacheName)) return null;
+		return wincache_ucache_get($this->prefix . $cacheName);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ class WinCacheSource implements ICacheSource {
 	 * @param	integer		$maxLifetime
 	 */
 	public function set($cacheName, $value, $maxLifetime) {
-		wincache_ucache_set($cacheName, $value, $this->getTTL($maxLifetime));
+		wincache_ucache_set($this->prefix . $cacheName, $value, $this->getTTL($maxLifetime));
 	}
 	
 	/**

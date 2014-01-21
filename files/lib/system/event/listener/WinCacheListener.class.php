@@ -26,17 +26,18 @@ class WinCacheListener implements IEventListener {
 					
 					$prefix = new Regex('^WCF_'.substr(sha1(WCF_DIR), 0, 10) . '_');
 					$data = array();
-					foreach (wincache_ucache_info() as $cache) {
-						if (!$prefix->match(basename($cache['key_name']))) continue;
+					$info = wincache_ucache_info();
+					foreach ($info['ucache_entries'] as $cache) {
+						if (!$prefix->match($cache['key_name'])) continue;
 						
 						// get additional cache information
 						$data['data']['WinCache'][] = array(
-							'filename' => $prefix->replace(basename($cache['key_name']), ''),
+							'filename' => $prefix->replace($cache['key_name'], ''),
 							'filesize' => $cache['value_size'],
 							'mtime' => TIME_NOW - $cache['age_seconds']
 						);
 						$eventObj->cacheData['files']++;
-						$this->cacheData['size'] += $cache['value_size'];
+						$eventObj->cacheData['size'] += $cache['value_size'];
 					}
 					$eventObj->caches = array_merge($data, $eventObj->caches);
 				}
