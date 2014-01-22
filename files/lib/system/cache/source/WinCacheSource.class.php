@@ -101,12 +101,12 @@ class WinCacheSource implements ICacheSource {
 		$info = wincache_ucache_info();
 		foreach ($info['ucache_entries'] as $cache) {
 			if ($regex === null) {
-				if (StringUtil::startsWith(basename($cache['key_name']), $this->prefix)) {
-					wincache_ucache_delete(basename($cache['key_name']));
+				if (StringUtil::startsWith($cache['key_name']), $this->prefix)) {
+					wincache_ucache_delete($cache['key_name']);
 				}
 			}
-			else if ($regex->match($cache['info'])) {
-				wincache_ucache_delete(basename($cache['key_name']));
+			else if ($regex->match($cache['key_name'])) {
+				wincache_ucache_delete($cache['key_name']);
 			}
 		}
 	}
