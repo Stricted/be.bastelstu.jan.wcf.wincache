@@ -24,7 +24,7 @@ class WinCacheListener implements IEventListener {
 					// set version
 					$eventObj->cacheData['version'] = phpversion('wincache');
 					
-					$prefix = new Regex('^WCF_'.substr(sha1(WCF_DIR), 0, 10) . '_');
+					$prefix = new Regex('^'.WCF_UUID.'_');
 					$data = array();
 					$info = wincache_ucache_info();
 					foreach ($info['ucache_entries'] as $cache) {
@@ -45,9 +45,7 @@ class WinCacheListener implements IEventListener {
 			
 			case "wcf\system\option\OptionHandler":
 				$eventObj->cachedOptions['cache_source_type']->modifySelectOptions($eventObj->cachedOptions['cache_source_type']->selectOptions . "\nwin:wcf.acp.option.cache_source_type.wincache");
-				
-				/* dirty but i need wait for pull request https://github.com/WoltLab/WCF/pull/1630 */
-				$eventObj->cachedOptions['cache_source_type']->enableOptions = $eventObj->cachedOptions['cache_source_type']->enableOptions . "\nwin:!cache_source_memcached_host";
+				$eventObj->cachedOptions['cache_source_type']->modifyEnableOptions($eventObj->cachedOptions['cache_source_type']->enableOptions . "\nwin:!cache_source_memcached_host");
 				break;
 			
 			case "wcf\acp\action\UninstallPackageAction":
