@@ -19,7 +19,7 @@
 	
 	<excludedpackages>
 		<excludedpackage version="2.2.0 Alpha 1">com.woltlab.wcf</excludedpackage>
-	<excludedpackages>
+	</excludedpackages>
 	
 	<instructions type="install">
 		<instruction type="file">files.tar</instruction>
@@ -28,6 +28,12 @@
 	</instructions>
 	
 	<instructions type="update" fromversion="1.0.0 pl 3">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="eventListener">eventlistener.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+	
+	<instructions type="update" fromversion="2.0.0">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="eventListener">eventlistener.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
