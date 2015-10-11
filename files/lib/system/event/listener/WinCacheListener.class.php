@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
-use wcf\system\event\IEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\exception\SystemException;
 use wcf\system\Regex;
 use wcf\system\WCF;
@@ -12,11 +12,11 @@ use wcf\system\WCF;
  * @package     be.bastelstu.jan.wcf.wincache
  * @category    Community Framework
  */
-class WinCacheListener implements IEventListener {
+class WinCacheListener implements IParameterizedEventListener {
 	/**
-	 * @see \wcf\system\event\IEventListener::execute()
+	 * @see \wcf\system\event\listener\IParameterizedEventListener::execute()
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		switch ($className) {
 			case "wcf\acp\page\CacheListPage":
 				if ($eventObj->cacheData['source'] == 'wcf\system\cache\source\WinCacheSource') {
@@ -58,7 +58,7 @@ class WinCacheListener implements IEventListener {
 					$statement->execute(array("be.bastelstu.jan.wcf.wincache"));
 					$row = $statement->fetchArray();
 					if ($packageID == $row['packageID']) {
-						// set cache to disk if apc(u) is enabled
+						// set cache to disk if wincache is enabled
 						$sql = "UPDATE	wcf".WCF_N."_option
 							SET	optionValue = ?
 							WHERE	optionName = ?
